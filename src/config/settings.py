@@ -46,8 +46,8 @@ ALLOWED_HOSTS = [allowed_host.strip() for allowed_host in allowed_hosts.split(",
 
 # Application definition
 
-APPLICATION_VERSION = env("APPLICATION_VERSION")
-APPLICATION_BUILD_NUMBER = env("APPLICATION_BUILD_NUMBER")
+APPLICATION_VERSION = env("APPLICATION_VERSION", default="1.0.0")
+APPLICATION_BUILD_NUMBER = env("APPLICATION_BUILD_NUMBER", default="1")
 
 REST_FRAMEWORK = {
     # https://www.django-rest-framework.org/api-guide/renderers/
@@ -222,7 +222,7 @@ CGW_SESSION_TIMEOUT_SECONDS = int(env("CGW_SESSION_TIMEOUT_SECONDS", default="2"
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-root
 MEDIA_ROOT = f"{BASE_DIR}/media/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-MEDIA_URL = env("MEDIA_URL", deafult="/media/")
+MEDIA_URL = env("MEDIA_URL", default="/media/")
 
 AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
