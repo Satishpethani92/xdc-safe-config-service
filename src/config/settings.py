@@ -236,6 +236,20 @@ AWS_QUERYSTRING_AUTH = False
 DEFAULT_FILE_STORAGE = env(
     "DEFAULT_FILE_STORAGE", default="django.core.files.storage.FileSystemStorage"
 )
+# In Django 4.2, STORAGES replaced DEFAULT_FILE_STORAGE. It was later removed removed in Django 5.1.
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#configuration-settings
+# https://docs.djangoproject.com/en/5.1/releases/5.1/
+STORAGES = {
+    "default": {
+        "BACKEND": os.getenv(
+            "DEFAULT_FILE_STORAGE", "django.core.files.storage.FileSystemStorage"
+        ),
+    },
+    "staticfiles": {
+        # Following is default but must explicitly set if "default" is
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"
+    },
+}
 
 # SECURITY
 # https://docs.djangoproject.com/en/4.0/ref/settings/#csrf-trusted-origins
@@ -245,3 +259,7 @@ if allowed_csrf_origins:
         allowed_csrf_origins.strip()
         for allowed_csrf_origins in allowed_csrf_origins.split(",")
     ]
+
+use_proxy_ssl_header = os.environ.get("USE_PROXY_SSL_HEADER", "false").lower() == "true"
+if use_proxy_ssl_header:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

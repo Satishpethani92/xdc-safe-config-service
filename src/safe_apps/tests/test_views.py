@@ -44,6 +44,7 @@ class JsonPayloadFormatViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app.featured,
             }
         ]
         url = reverse("v1:safe-apps:list")
@@ -72,6 +73,7 @@ class JsonPayloadFormatViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app.featured,
             }
         ]
         url = reverse("v1:safe-apps:list")
@@ -100,6 +102,7 @@ class JsonPayloadFormatViewTests(APITestCase):
                 "features": [feature.key],
                 "developerWebsite": safe_app.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app.featured,
             }
         ]
         url = reverse("v1:safe-apps:list")
@@ -134,6 +137,7 @@ class JsonPayloadFormatViewTests(APITestCase):
                         "url": social_profile.url,
                     }
                 ],
+                "featured": safe_app.featured,
             }
         ]
         url = reverse("v1:safe-apps:list")
@@ -163,6 +167,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_1.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_1.featured,
             },
             {
                 "id": safe_app_2.app_id,
@@ -179,6 +184,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_2.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_2.featured,
             },
             {
                 "id": safe_app_3.app_id,
@@ -195,6 +201,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_3.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_3.featured,
             },
         ]
         url = reverse("v1:safe-apps:list")
@@ -222,6 +229,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_1.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_1.featured,
             },
             {
                 "id": safe_app_2.app_id,
@@ -238,6 +246,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_2.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_2.featured,
             },
             {
                 "id": safe_app_3.app_id,
@@ -254,6 +263,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_3.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_3.featured,
             },
         ]
         url = reverse("v1:safe-apps:list") + f'{"?chainId="}'
@@ -283,6 +293,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_4.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_4.featured,
             },
             {
                 "id": safe_app_5.app_id,
@@ -299,6 +310,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_5.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_5.featured,
             },
         ]
         url = reverse("v1:safe-apps:list") + f'{"?chainId=1"}'
@@ -337,6 +349,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_1.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_1.featured,
             }
         ]
         url = reverse("v1:safe-apps:list") + f'{"?chainId=2&chainId=1"}'
@@ -368,6 +381,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app.featured,
             }
         ]
         self.assertEqual(response.status_code, 200)
@@ -407,6 +421,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_1.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_1.featured,
             },
             {
                 "id": safe_app_2.app_id,
@@ -424,6 +439,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_2.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_2.featured,
             },
         ]
         self.assertEqual(response.status_code, 200)
@@ -451,6 +467,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_1.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_1.featured,
             }
         ]
         url = (
@@ -492,6 +509,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_1.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_1.featured,
             },
             {
                 "id": safe_app_3.app_id,
@@ -509,6 +527,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_3.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_3.featured,
             },
             {
                 "id": safe_app_2.app_id,
@@ -525,6 +544,7 @@ class FilterSafeAppListViewTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_2.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_2.featured,
             },
         ]
         url = reverse("v1:safe-apps:list") + f'{"?clientUrl=safe.com"}'
@@ -556,6 +576,7 @@ class ProviderInfoTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app.featured,
             }
         ]
         url = reverse("v1:safe-apps:list")
@@ -584,6 +605,7 @@ class ProviderInfoTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app.featured,
             }
         ]
         url = reverse("v1:safe-apps:list")
@@ -614,6 +636,7 @@ class CacheSafeAppTests(APITestCase):
                 "features": [],
                 "developerWebsite": safe_app_1.developer_website,
                 "socialProfiles": [],
+                "featured": safe_app_1.featured,
             }
         ]
         url = reverse("v1:safe-apps:list")
@@ -629,24 +652,25 @@ class CacheSafeAppTests(APITestCase):
 
 
 class SafeAppsVisibilityTests(APITestCase):
-    def test_visible_safe_app_is_shown(self) -> None:
-        visible_safe_app = SafeAppFactory.create(visible=True)
+    def test_listed_safe_app_is_shown(self) -> None:
+        listed_safe_app = SafeAppFactory.create(listed=True)
         json_response = [
             {
-                "id": visible_safe_app.app_id,
-                "url": visible_safe_app.url,
-                "name": visible_safe_app.name,
-                "iconUrl": f"http://testserver{visible_safe_app.icon_url.url}",
-                "description": visible_safe_app.description,
-                "chainIds": visible_safe_app.chain_ids,
+                "id": listed_safe_app.app_id,
+                "url": listed_safe_app.url,
+                "name": listed_safe_app.name,
+                "iconUrl": f"http://testserver{listed_safe_app.icon_url.url}",
+                "description": listed_safe_app.description,
+                "chainIds": listed_safe_app.chain_ids,
                 "provider": None,
                 "accessControl": {
                     "type": "NO_RESTRICTIONS",
                 },
                 "tags": [],
                 "features": [],
-                "developerWebsite": visible_safe_app.developer_website,
+                "developerWebsite": listed_safe_app.developer_website,
                 "socialProfiles": [],
+                "featured": listed_safe_app.featured,
             }
         ]
         url = reverse("v1:safe-apps:list")
@@ -656,10 +680,56 @@ class SafeAppsVisibilityTests(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertCountEqual(response.json(), json_response)
 
-    def test_not_visible_safe_app_is_not_shown(self) -> None:
-        SafeAppFactory.create(visible=False)
-        json_response: List[Dict[str, Any]] = []
+    def test_unlisted_safe_app_is_shown_if_only_listed_is_not_set(self) -> None:
+        unlisted_safe_app = SafeAppFactory.create(listed=False)
+        listed_safe_app = SafeAppFactory.create(listed=True)
+        json_response = [
+            {
+                "id": unlisted_safe_app.app_id,
+                "url": unlisted_safe_app.url,
+                "name": unlisted_safe_app.name,
+                "iconUrl": f"http://testserver{unlisted_safe_app.icon_url.url}",
+                "description": unlisted_safe_app.description,
+                "chainIds": unlisted_safe_app.chain_ids,
+                "provider": None,
+                "accessControl": {
+                    "type": "NO_RESTRICTIONS",
+                },
+                "tags": [],
+                "features": [],
+                "developerWebsite": unlisted_safe_app.developer_website,
+                "socialProfiles": [],
+                "featured": unlisted_safe_app.featured,
+            },
+            {
+                "id": listed_safe_app.app_id,
+                "url": listed_safe_app.url,
+                "name": listed_safe_app.name,
+                "iconUrl": f"http://testserver{listed_safe_app.icon_url.url}",
+                "description": listed_safe_app.description,
+                "chainIds": listed_safe_app.chain_ids,
+                "provider": None,
+                "accessControl": {
+                    "type": "NO_RESTRICTIONS",
+                },
+                "tags": [],
+                "features": [],
+                "developerWebsite": listed_safe_app.developer_website,
+                "socialProfiles": [],
+                "featured": listed_safe_app.featured,
+            },
+        ]
         url = reverse("v1:safe-apps:list")
+
+        response = self.client.get(path=url, data=None, format="json")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertCountEqual(response.json(), json_response)
+
+    def test_unlisted_safe_app_is_not_shown_if_only_listed_is_set(self) -> None:
+        SafeAppFactory.create(listed=False)
+        json_response: List[Dict[str, Any]] = []
+        url = reverse("v1:safe-apps:list") + f'{"?onlyListed=true"}'
 
         response = self.client.get(path=url, data=None, format="json")
 
@@ -796,6 +866,9 @@ class SafeAppsSocialProfilesTests(APITestCase):
         social_profile_3 = SocialProfileFactory.create(
             platform=SocialProfile.Platform.TWITTER, safe_app=safe_app
         )
+        social_profile_4 = SocialProfileFactory.create(
+            platform=SocialProfile.Platform.TELEGRAM, safe_app=safe_app
+        )
         url = reverse("v1:safe-apps:list")
 
         response = self.client.get(path=url, data=None, format="json")
@@ -812,6 +885,10 @@ class SafeAppsSocialProfilesTests(APITestCase):
                 {
                     "platform": "GITHUB",
                     "url": social_profile_2.url,
+                },
+                {
+                    "platform": "TELEGRAM",
+                    "url": social_profile_4.url,
                 },
                 {
                     "platform": "TWITTER",

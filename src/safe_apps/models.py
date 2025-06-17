@@ -1,4 +1,5 @@
 import os
+import uuid
 from enum import Enum
 from typing import IO, Union
 
@@ -17,7 +18,7 @@ _HOSTNAME_VALIDATOR = RegexValidator(
 
 def safe_app_icon_path(instance: "SafeApp", filename: str) -> str:
     _, file_extension = os.path.splitext(filename)
-    return f"safe_apps/{instance.app_id}/icon{file_extension}"
+    return f"safe_apps/{uuid.uuid4()}/icon{file_extension}"
 
 
 def validate_safe_app_icon_size(image: Union[str, IO[bytes]]) -> None:
@@ -57,17 +58,16 @@ class SafeApp(models.Model):
         DOMAIN_ALLOWLIST = "DOMAIN_ALLOWLIST"
 
     app_id = models.BigAutoField(primary_key=True)
-    visible = models.BooleanField(
+    listed = models.BooleanField(
         default=True
-    )  # True if this safe-app should be visible from the view. False otherwise
+    )  # True if this safe-app should be listed in the view. False otherwise
     url = models.URLField()
     name = models.CharField(max_length=200)
     icon_url = models.ImageField(
         validators=[validate_safe_app_icon_size],
         upload_to=safe_app_icon_path,
         max_length=255,
-        null=True,
-        blank=True,
+        default="safe_apps/icon_url.jpg",
     )
     description = models.CharField(max_length=200)
     chain_ids = ArrayField(models.PositiveBigIntegerField())
@@ -80,6 +80,7 @@ class SafeApp(models.Model):
         help_text="Clients that are only allowed to use this SafeApp",
     )
     developer_website = models.URLField(null=True, blank=True)
+    featured = models.BooleanField(default=False)
 
     def get_access_control_type(self) -> AccessControlPolicy:
         if self.exclusive_clients.exists():
@@ -118,6 +119,7 @@ class SocialProfile(models.Model):
         DISCORD = "DISCORD"
         GITHUB = "GITHUB"
         TWITTER = "TWITTER"
+        TELEGRAM = "TELEGRAM"
 
     safe_app = models.ForeignKey(SafeApp, on_delete=models.CASCADE)
     platform = models.CharField(choices=Platform.choices, max_length=255)

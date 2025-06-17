@@ -44,7 +44,7 @@ class SafeAppFactory(DjangoModelFactory):  # type: ignore[misc]
         model = SafeApp
 
     app_id = factory.Sequence(lambda id: id)
-    visible = True
+    listed = True
     url = factory.Faker("url")
     name = factory.Faker("company")
     icon_url = factory.django.ImageField(width=50, height=50)
@@ -52,6 +52,7 @@ class SafeAppFactory(DjangoModelFactory):  # type: ignore[misc]
     chain_ids = factory.Faker("pylist", nb_elements=2, value_types=(int,))
     provider = None
     developer_website = factory.Faker("url")
+    featured = factory.Faker("boolean")
 
     @factory.post_generation
     def exclusive_clients(self, create, extracted, **kwargs):  # type: ignore[no-untyped-def] # decorator is untyped
